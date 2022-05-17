@@ -1,0 +1,32 @@
+/* DEFAULT STYLING */
+Button {
+    -fx-border-radius: 0;
+    -fx-border-style: none;
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+}
+
+.root {
+    -fx-background-color: #f5f5ff;
+    -fx-font-size: 14px;
+}
+
+#password-label {
+    -fx-background-color: rgba(255, 255, 255, 1.0);
+    -fx-background-radius: 5px 0 0 5px;
+    -fx-border-radius: 5px 0 0 5px;
+}
+
+#copy-password-button {
+    -fx-background-color: #dedede;
+    -fx-background-radius: 0 5px 5px 0;
+    -fx-border-radius: 0 5px 5px 0;
+}
+
+#copy-password-button:hover {
+    -fx-background-color: #d7d7d7;
+}
+
+.toggle:selected .thumb-area {
+    -fx-background-color: #324896;
+}

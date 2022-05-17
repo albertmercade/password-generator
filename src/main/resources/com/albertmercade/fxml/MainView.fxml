@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.control.ToggleSwitch?>
+
+<AnchorPane prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.albertmercade.controllers.MainViewController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="76.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <HBox alignment="CENTER" prefWidth="200.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <children>
+                  <Label id="password-label" fx:id="passwordLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" text="fkwn34jfnwj23j j9sn" HBox.hgrow="ALWAYS" />
+                  <Button id="copy-password-button" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#copyPasswordToClipboard" prefHeight="30.0" text="Copy" textAlignment="CENTER">
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" top="30.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" text="Password length" HBox.hgrow="ALWAYS" />
+                  <Spinner fx:id="passwordLengthSpinner" editable="true" maxWidth="75.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" spacing="10.0">
+               <children>
+                  <ToggleSwitch fx:id="upperCaseToggle" maxWidth="35.0" selected="true" styleClass="toggle" />
+                  <Label maxWidth="1.7976931348623157E308" text="Upper Case (A-Z)" HBox.hgrow="ALWAYS">
+                     <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" spacing="10.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+               <children>
+                  <ToggleSwitch fx:id="lowerCaseToggle" maxWidth="35.0" selected="true" styleClass="toggle" />
+                  <Label maxWidth="1.7976931348623157E308" text="Lower Case (a-z)" HBox.hgrow="ALWAYS">
+                     <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" spacing="10.0">
+               <children>
+                  <ToggleSwitch fx:id="digitsToggle" maxWidth="35.0" selected="true" styleClass="toggle" />
+                  <Label maxWidth="1.7976931348623157E308" text="Digits (0-9)" HBox.hgrow="ALWAYS">
+                     <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Spinner fx:id="digitsSpinner" editable="true" maxWidth="75.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <ToggleSwitch fx:id="specialCharsToggle" maxWidth="35.0" selected="true" styleClass="toggle" />
+                  <Label maxWidth="1.7976931348623157E308" text="Special Characters" HBox.hgrow="ALWAYS">
+                     <padding>
+                        <Insets bottom="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Spinner fx:id="specialCharsSpinner" editable="true" maxWidth="75.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="40.0" right="40.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
