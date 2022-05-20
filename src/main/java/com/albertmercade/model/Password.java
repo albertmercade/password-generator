@@ -1,8 +1,6 @@
-package com.albertmercade.models;
+package com.albertmercade.model;
 
 import javafx.beans.property.*;
-
-import java.util.ArrayList;
 
 public class Password {
 
@@ -16,6 +14,8 @@ public class Password {
             includeDigits, includeSpecialChars;
     // Minimum number of occurrences of a specific character type
     private final IntegerProperty minNumDigits, minNumSpecialChars;
+    // Set of special characters to use in password
+    private final StringProperty userDefinedSpecialChars;
 
     public Password() {
         // Default settings
@@ -26,6 +26,7 @@ public class Password {
         minNumDigits = new SimpleIntegerProperty(5);
         includeSpecialChars = new SimpleBooleanProperty(true);
         minNumSpecialChars = new SimpleIntegerProperty(5);
+        userDefinedSpecialChars = new SimpleStringProperty("");
 
         // Generate initial password according to default settings
         password = new SimpleStringProperty();
@@ -121,6 +122,18 @@ public class Password {
 
     public int getMinNumSpecialChars() {
         return minNumSpecialChars.get();
+    }
+
+    public StringProperty getUserDefinedSpecialCharsProperty() {
+        return userDefinedSpecialChars;
+    }
+
+    public char[] getUserDefinedSpecialChars() {
+        return userDefinedSpecialChars.get().toCharArray();
+    }
+
+    public void setUserDefinedSpecialChars(String specialChars) {
+        userDefinedSpecialChars.set(specialChars);
     }
 
     private int calculateMinPasswordLength() {
