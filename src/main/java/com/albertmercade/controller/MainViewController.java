@@ -1,4 +1,4 @@
-package com.albertmercade.controllers;
+package com.albertmercade.controller;
 
 import com.albertmercade.model.Password;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -8,38 +8,39 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
+import javafx.scene.control.TextField;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class MainViewController {
 
     // Constants
-    private final static char[] SPECIAL_CHARS = {
-            '!','#','$','%','&','(',')','*','+','?','@','[',']','^','{','}','~'
-    };
+    private final static List<Character> SPECIAL_CHARS = Arrays.asList(
+        '!', '#', '$', '%', '&', '(', ')', '*', '+', '?', '@', '[', ']', '^', '{', '}', '~'
+    );
     private final static short ASCII_UPPERCASE_BASE = 65;
     private final static short ASCII_LOWERCASE_BASE = 97;
     private final static short ALPHABET_LENGTH = 26;
     private final static int MAX_PASSWORD_LENGTH = 100;
     private final static int MAX_MIN_NUM_CHARS_PER_TYPE = 10;
+
+    // Enum defining the possible chars types in the password
     private enum CHAR_TYPES {
         UPPER,
         LOWER,
         DIGIT,
         SPECIAL
     }
-
-    private static ArrayList<CHAR_TYPES> includedCharTypes;
-
+    // ArrayList indicating the char types to be included in the password
+    private ArrayList<CHAR_TYPES> includedCharTypes;
 
     // Random instance for random number generation
     private final static Random randomGenerator = new Random();
@@ -47,7 +48,7 @@ public class MainViewController {
     // Model
     private Password password;
 
-    // View nodes
+    // FXML View nodes
     @FXML private Label passwordLabel;
     @FXML private Button copyPasswordButton;
     @FXML private FontAwesomeIconView copyPasswordGlyph;
@@ -59,6 +60,7 @@ public class MainViewController {
     @FXML private Spinner<Integer> digitsSpinner;
     @FXML private ToggleSwitch specialCharsToggle;
     @FXML private Spinner<Integer> specialCharsSpinner;
+    @FXML private TextField userSpecialCharsTextField;
 
     // Methods
     public void initialize() {
@@ -74,13 +76,17 @@ public class MainViewController {
     }
 
     private void initializeViewNodes() {
-        // Setup range of values for Spinners
-        initializeSpinners();
-
         // Bind password label to password string
         passwordLabel.textProperty().bind(password.getPasswordProperty());
-        // Bind ToggleSwitches to their respective properties
+
+        // Bind ToggleSwitches to their respective Password properties
         initializeToggles();
+
+        // Setup range of values for Spinners and bind them to their respective Password properties
+        initializeSpinners();
+
+        // Bind TextField to its Password property
+        initializeSpecialCharsTextField();
     }
 
     private void initializeSpinners() {
@@ -151,10 +157,22 @@ public class MainViewController {
         password.getIncludeSpecialCharsProperty().bind(specialCharsToggle.selectedProperty());
         specialCharsToggle.selectedProperty().addListener((observable, oldValue, newValue) -> {
             specialCharsSpinner.setDisable(!newValue);
+            userSpecialCharsTextField.setDisable(!newValue);
             checkAllTogglesUnchecked();
             updateIncludedCharTypes(newValue, CHAR_TYPES.SPECIAL);
             setNewPassword();
         });
+    }
+
+    private void initializeSpecialCharsTextField() {
+        // Bind special chars text field to password special chars string
+        userSpecialCharsTextField.textProperty().bindBidirectional(password.getUserDefinedSpecialCharsProperty());
+        // When text in text field is updated, generate new password
+        userSpecialCharsTextField.textProperty().addListener(((observable, oldValue, newValue) -> {
+            String filteredSpecialChars = filterUserDefinedSpecialChars(newValue);
+            password.setUserDefinedSpecialChars(filteredSpecialChars);
+            setNewPassword();
+        }));
     }
 
     private void setNewPassword() {
@@ -253,6 +271,13 @@ public class MainViewController {
         }
     }
 
+    private String filterUserDefinedSpecialChars(String newChars) {
+        return newChars.codePoints()
+                .filter(c -> SPECIAL_CHARS.contains((char)c))
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+    }
+
     private char randomChar() {
         int randomCharTypeIdx = randomGenerator.nextInt(includedCharTypes.size());
         return switch (includedCharTypes.get(randomCharTypeIdx)) {
@@ -276,7 +301,18 @@ public class MainViewController {
     }
 
     private char randomSpecialChar() {
-        int randomIdx = randomGenerator.nextInt(SPECIAL_CHARS.length);
-        return SPECIAL_CHARS[randomIdx];
+        char randomChar;
+        char[] userDefinedSpecialChars = password.getUserDefinedSpecialChars();
+
+        if (userDefinedSpecialChars.length > 0) {
+            int randomIdx = randomGenerator.nextInt(userDefinedSpecialChars.length);
+            randomChar = userDefinedSpecialChars[randomIdx];
+        }
+        else {
+            int randomIdx = randomGenerator.nextInt(SPECIAL_CHARS.size());
+            randomChar = SPECIAL_CHARS.get(randomIdx);
+        }
+
+        return randomChar;
     }
 }
