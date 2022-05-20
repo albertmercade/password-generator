@@ -1,48 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.ToggleSwitch?>
 
-<AnchorPane prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.albertmercade.controllers.MainViewController">
+<AnchorPane prefHeight="440.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.albertmercade.controller.MainViewController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="76.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="76.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
          <children>
+            <Label fx:id="copyPasswordLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Password copied to clipboard!" textAlignment="CENTER" textFill="#35a637" visible="false" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
             <HBox alignment="CENTER" prefWidth="200.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <children>
-                  <Label id="password-label" fx:id="passwordLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" text="fkwn34jfnwj23j j9sn" HBox.hgrow="ALWAYS" />
-                  <Button id="copy-password-button" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#copyPasswordToClipboard" prefHeight="30.0" text="Copy" textAlignment="CENTER">
+                  <Label fx:id="passwordLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" text="passwordPlaceholder" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="PT Mono Bold" size="13.0" />
+                     </font>
                      <padding>
-                        <Insets left="10.0" right="10.0" />
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </padding>
+                     <styleClass>
+                        <String fx:value="password-label" />
+                        <String fx:value="password-hbox-border" />
+                     </styleClass></Label>
+                  <Button fx:id="copyPasswordButton" maxHeight="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" onAction="#copyPasswordToClipboard" textAlignment="CENTER">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <graphic>
+                        <FontAwesomeIconView fx:id="copyPasswordGlyph" glyphName="CLONE" size="15.0" text="" />
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="copy-password-button" />
+                        <String fx:value="password-hbox-border" />
+                     </styleClass>
                   </Button>
                </children>
-               <padding>
-                  <Insets bottom="15.0" top="30.0" />
-               </padding>
+               <VBox.margin>
+                  <Insets bottom="15.0" top="3.0" />
+               </VBox.margin>
             </HBox>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#generateNewPassword" styleClass="generate-password-button" text="Generate New Password" VBox.vgrow="ALWAYS">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <padding>
+                  <Insets bottom="8.0" top="8.0" />
+               </padding>
+               <graphic>
+                  <FontAwesomeIconView glyphName="REFRESH" size="15.0" text="" />
+               </graphic>
+            </Button>
             <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308">
                <children>
                   <Label maxWidth="1.7976931348623157E308" text="Password length" HBox.hgrow="ALWAYS" />
                   <Spinner fx:id="passwordLengthSpinner" editable="true" maxWidth="75.0" />
                </children>
                <VBox.margin>
-                  <Insets bottom="20.0" top="20.0" />
+                  <Insets bottom="10.0" top="40.0" />
                </VBox.margin>
             </HBox>
             <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" spacing="10.0">
@@ -85,20 +125,32 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <VBox maxWidth="1.7976931348623157E308">
                <children>
-                  <ToggleSwitch fx:id="specialCharsToggle" maxWidth="35.0" selected="true" styleClass="toggle" />
-                  <Label maxWidth="1.7976931348623157E308" text="Special Characters" HBox.hgrow="ALWAYS">
-                     <padding>
-                        <Insets bottom="5.0" top="5.0" />
-                     </padding>
-                  </Label>
-                  <Spinner fx:id="specialCharsSpinner" editable="true" maxWidth="75.0" />
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <ToggleSwitch fx:id="specialCharsToggle" maxWidth="35.0" selected="true" styleClass="toggle" />
+                        <Label maxWidth="1.7976931348623157E308" text="Special Characters" HBox.hgrow="ALWAYS">
+                           <padding>
+                              <Insets bottom="5.0" top="5.0" />
+                           </padding>
+                        </Label>
+                        <Spinner fx:id="specialCharsSpinner" editable="true" maxWidth="75.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <TextField fx:id="userSpecialCharsTextField" promptText="Special characters to use e.g. #%&amp;">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
                </children>
                <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
+                  <Insets bottom="15.0" top="10.0" />
                </VBox.margin>
-            </HBox>
+            </VBox>
          </children>
          <padding>
             <Insets left="40.0" right="40.0" />
