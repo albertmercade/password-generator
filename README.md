@@ -9,7 +9,9 @@ to include
  * The special characters to use in the generation of the password.
 There's a default set of characters that will be used if none is provided.
 
-The application has been developed using JavaFX 17 and FXML (with SceneBuilder).
+The application has been developed using [JavaFX](https://openjfx.io/) 17
+and [FXML](https://openjfx.io/javadoc/17/javafx.fxml/javafx/fxml/doc-files/introduction_to_fxml.html)
+(with [SceneBuilder](https://gluonhq.com/products/scene-builder/)).
 
 ![Application screen recording](https://raw.githubusercontent.com/albertmercade/password-generator/media/screen-recording.gif)
 
