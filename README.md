@@ -1,6 +1,6 @@
 # Password Generator App
 
-App to generate passwords according to certain criteria. One can customise:
+App to generate passwords according to certain criteria. The user can customise:
  * Length of the password
  * Types of characters included
 (upper case, lower case, digits and special characters)
@@ -9,13 +9,13 @@ to include
  * The special characters to use in the generation of the password.
 There's a default set of characters that will be used if none is provided.
 
-The application has been developed using JDK 17 and JavaFX 17.
+The application has been developed using JavaFX 17 and FXML (with SceneBuilder).
 
 ![Application screen recording](https://raw.githubusercontent.com/albertmercade/password-generator/media/screen-recording.gif)
 
 ## Run
 
-1. Have JDK 17 installed in your machine.
+1. Have JDK 11 (or newer) installed in your machine.
 
 2. Clone this repository:
 ```shell

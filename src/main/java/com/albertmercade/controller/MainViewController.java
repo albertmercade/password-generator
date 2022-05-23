@@ -280,12 +280,22 @@ public class MainViewController {
 
     private char randomChar() {
         int randomCharTypeIdx = randomGenerator.nextInt(includedCharTypes.size());
-        return switch (includedCharTypes.get(randomCharTypeIdx)) {
-            case UPPER -> randomUpperCaseChar();
-            case DIGIT -> randomDigitChar();
-            case SPECIAL -> randomSpecialChar();
-            default  -> randomLowerCaseChar();
+        char selectedChar;
+        switch (includedCharTypes.get(randomCharTypeIdx)) {
+            case UPPER:
+                selectedChar = randomUpperCaseChar();
+                break;
+            case DIGIT:
+                selectedChar = randomDigitChar();
+                break;
+            case SPECIAL:
+                selectedChar = randomSpecialChar();
+                break;
+            default:
+                selectedChar = randomLowerCaseChar();
+                break;
         };
+        return selectedChar;
     }
 
     private char randomUpperCaseChar() {
