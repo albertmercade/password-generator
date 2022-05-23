@@ -189,8 +189,8 @@ public class MainViewController {
         int passwordLength = password.getPasswordLength(),
                 minUpperCase = includeUpperCase ? 1 : 0,
                 minLowerCase = includeLowerCase ? 1 : 0,
-                minNumDigits = password.getMinNumDigits(),
-                minNumSpecialChars = password.getMinNumSpecialChars();
+                minNumDigits = includeDigits ? password.getMinNumDigits() : 0,
+                minNumSpecialChars = includeSpecialChars ? password.getMinNumSpecialChars() : 0;
 
         ArrayList<Character> newPassword = new ArrayList<>(passwordLength);
 
