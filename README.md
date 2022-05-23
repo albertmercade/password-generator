@@ -13,7 +13,7 @@ The application has been developed using [JavaFX](https://openjfx.io/) 17
 and [FXML](https://openjfx.io/javadoc/17/javafx.fxml/javafx/fxml/doc-files/introduction_to_fxml.html)
 (with [SceneBuilder](https://gluonhq.com/products/scene-builder/)).
 
-![Application screen recording](https://raw.githubusercontent.com/albertmercade/password-generator/media/screen-recording.gif)
+![Application screen recording](https://raw.githubusercontent.com/albertmercade/password-generator/media/app-demo.gif)
 
 ## Run
 
