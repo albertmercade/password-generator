@@ -11,7 +11,7 @@ There's a default set of characters that will be used if none is provided.
 
 The application has been developed using JDK 17 and JavaFX 17.
 
-![Application screenshot](https://raw.githubusercontent.com/albertmercade/password-generator/media/screenshot.png)
+![Application screen recording](https://raw.githubusercontent.com/albertmercade/password-generator/media/screen-recording.gif)
 
 ## Run
 
